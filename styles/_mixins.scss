@@ -1,0 +1,87 @@
+/**
+ * @author  https://github.com/silence717
+ * @date on 2017/02/22
+ */
+
+// 清除浮动
+@mixin clear-fix {
+  zoom: 1;
+  &:before, &:after {
+	content: "";
+	display: block;
+	clear: both;
+  }
+}
+// 居中
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+// flex布局居中
+@mixin absolute-center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+// 单行文本超出溢出省略号
+@mixin text-overflow-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+// 多行文本超出，最后一行做省略号
+@mixin multi-text-overflow-ellipsis($number) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $number;
+  overflow: hidden;
+}
+// 边框圆角
+@mixin border-radius($number) {
+  border-radius: $number;
+  -moz-border-radius: $number;
+  -webkit-border-radius: $number;
+}
+// 阴影，box-shadow可以有多组值，所以在变量参数后面添加...
+@mixin box-shadow($shadow...) {
+  -webkit-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+// 透明度opacity ie: $number=50
+@mixin opacity($number) {
+  filter: alpha(opacity=$number);
+  -moz-opacity: $number / 100;
+  opacity: $number / 100;
+}
+// 背景线性渐变
+@mixin linear-gradient($angel, $startColor, $endColor, $background-color: $endColor) {
+  background: $background-color linear-gradient($angel, $startColor, $endColor);
+}
+// 多行文本溢出省略、完美解决方案
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bgColor: white){
+  overflow: hidden;
+  position: relative;
+  line-height: $lineHeight;
+  max-height: $lineHeight * $lineCount;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 1em;
+  &:before {
+	content: '...';
+	position: absolute;
+	right: 0;
+	bottom: 0;
+  }
+  &:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	width: 1em;
+	height: 1em;
+	margin-top: 0.2em;
+	background: $bgColor;
+  }
+}
